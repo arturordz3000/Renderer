@@ -13,10 +13,30 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\vendor">
+      <UniqueIdentifier>{81e8a1ef-fff3-496c-80f5-df78629d2687}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\vendor\tga">
+      <UniqueIdentifier>{cf14c621-ad74-42c5-84f5-a395584a74a4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\vendor">
+      <UniqueIdentifier>{74b3d526-b76b-49b3-ae35-c39a8d0af170}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\vendor\tga">
+      <UniqueIdentifier>{1d728d08-e838-43a3-8e4d-cfbe79f755eb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="vendor\tga\tgaimage.cpp">
+      <Filter>Source Files\vendor\tga</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="vendor\tga\tgaimage.h">
+      <Filter>Header Files\vendor\tga</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
