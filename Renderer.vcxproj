@@ -127,10 +127,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\geometry\geometry.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\vendor\tga\tgaimage.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\geometry\geometry.h" />
+    <ClInclude Include="src\math\point.h" />
     <ClInclude Include="src\vendor\tga\tgaimage.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

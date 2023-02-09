@@ -33,10 +33,19 @@
     <ClCompile Include="src\vendor\tga\tgaimage.cpp">
       <Filter>Source Files\vendor\tga</Filter>
     </ClCompile>
+    <ClCompile Include="src\geometry\geometry.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\vendor\tga\tgaimage.h">
       <Filter>Header Files\vendor\tga</Filter>
+    </ClInclude>
+    <ClInclude Include="src\geometry\geometry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\math\point.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
