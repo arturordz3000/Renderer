@@ -27,15 +27,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="vendor\tga\tgaimage.cpp">
+    <ClCompile Include="src\vendor\tga\tgaimage.cpp">
       <Filter>Source Files\vendor\tga</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="vendor\tga\tgaimage.h">
+    <ClInclude Include="src\vendor\tga\tgaimage.h">
       <Filter>Header Files\vendor\tga</Filter>
     </ClInclude>
   </ItemGroup>
