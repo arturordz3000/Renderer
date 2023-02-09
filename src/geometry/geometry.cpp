@@ -32,7 +32,7 @@ namespace Renderer
 			// t will help us to calculate y
 			float t = (x - point1.x) / (float)(point2.x - point1.x);
 
-			// We do a linear interpolation to calculate y based on t (the percentage covered from point1.x to poin2.x)
+			// We do a linear interpolation to calculate y based on t (should be the same percentage covered from point1.x to poin2.x)
 			int y = point1.y * (1.0 - t) + point2.y * t;
 
 			if (transposed)
