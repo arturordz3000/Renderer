@@ -33,7 +33,7 @@
     <ClCompile Include="src\vendor\tga\tgaimage.cpp">
       <Filter>Source Files\vendor\tga</Filter>
     </ClCompile>
-    <ClCompile Include="src\geometry\geometry.cpp">
+    <ClCompile Include="src\geometry\line.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -41,7 +41,7 @@
     <ClInclude Include="src\vendor\tga\tgaimage.h">
       <Filter>Header Files\vendor\tga</Filter>
     </ClInclude>
-    <ClInclude Include="src\geometry\geometry.h">
+    <ClInclude Include="src\geometry\line.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\math\point.h">
