@@ -26,15 +26,19 @@ namespace Renderer
 			std::swap(point1, point2);
 		}
 
+		int deltaX = point2.x - point1.x;
+		int deltaY = point2.y - point1.y;
+
+		// This is the amount of error we're going to accumulate on each X.
+		// It is basically the slope of the line.
+		float deltaError = abs(deltaY / float(deltaX));
+
+		// Accumulated error
+		float error = 0;
+		int y = point1.y;
+
 		for (int x = point1.x; x <= point2.x; x++)
 		{
-			// t represents the percentage covered from point1.x to point2.x.
-			// t will help us to calculate y
-			float t = (x - point1.x) / (float)(point2.x - point1.x);
-
-			// We do a linear interpolation to calculate y based on t (should be the same percentage covered from point1.x to poin2.x)
-			int y = point1.y * (1.0 - t) + point2.y * t;
-
 			if (transposed)
 			{
 				// De-transpose the image
@@ -43,6 +47,19 @@ namespace Renderer
 			else
 			{
 				image.set(x, y, color);
+			}
+
+			error += deltaError;
+
+			// If the accumulated error is greater than half a pixel,
+			// we better increment (or decrement) y.
+			if (error > 0.5)
+			{
+				error -= 1;
+
+				// If the initial point is located above the second point,
+				// we decrement Y, otherwise, we increment it.
+				y += point1.y > point2.y ? -1 : 1;
 			}
 		}
 	}
