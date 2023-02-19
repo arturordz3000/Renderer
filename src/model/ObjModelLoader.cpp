@@ -30,9 +30,8 @@ namespace Renderer
 
 			// This variable will help us to skip characters we're not interested in.
 			char thrash;
-
 			
-			if (line.compare(0, 2, "v "))
+			if (line.compare(0, 2, "v ") == 0)
 			{
 				// We expect a line like: v 1.0 1.0 1.0
 				
@@ -43,8 +42,13 @@ namespace Renderer
 				lineStream >> vertex.x >> vertex.y >> vertex.z;
 				model.vertices.push_back(vertex);
 			}
-			else if (line.compare(0, 2, "f "))
+			else if (line.compare(0, 2, "f ") == 0)
 			{
+				/*if ((int)model.faces.size() == 2491)
+				{
+					int debug = 0;
+				}*/
+
 				// We expect a line like: f 6/4/1 3/5/3 7/6/5
 
 				// Getting rid of the initial "f" character
@@ -56,10 +60,12 @@ namespace Renderer
 				// The first number of each set is the vertex index which we have to store.
 				vector<int> indices;
 				int index;
-				while (lineStream >> index >> thrash >> thrash >> thrash >> thrash)
+
+				// We have to get rid of indices we're not interested in.
+				int indexThrash;
+
+				while (lineStream >> index >> thrash >> indexThrash >> thrash >> indexThrash)
 				{
-					// .obj files are 1-indexed.
-					index--;
 					indices.push_back(index);
 				}
 

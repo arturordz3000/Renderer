@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include "../math/vector.h"
+#include "../vendor/tga/tgaimage.h"
 
 using namespace std;
 
@@ -14,6 +15,11 @@ namespace Renderer
 		vector<Vector3<float>> vertices;
 		vector<vector<int>> faces;
 
-		void Draw();
+		Model()
+		{
+			vertices.push_back(Vector3<float>(0, 0, 0));
+		}
+
+		void Draw(TGAImage& image, TGAColor color);
 	};
 }
