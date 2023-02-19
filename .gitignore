@@ -399,3 +399,6 @@ FodyWeavers.xsd
 
 # TGA output file
 output.tga
+
+# Do not ignore assets
+!src/assets/*.*
