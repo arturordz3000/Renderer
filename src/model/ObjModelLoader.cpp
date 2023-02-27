@@ -44,11 +44,6 @@ namespace Renderer
 			}
 			else if (line.compare(0, 2, "f ") == 0)
 			{
-				/*if ((int)model.faces.size() == 2491)
-				{
-					int debug = 0;
-				}*/
-
 				// We expect a line like: f 6/4/1 3/5/3 7/6/5
 
 				// Getting rid of the initial "f" character
@@ -66,7 +61,7 @@ namespace Renderer
 
 				while (lineStream >> index >> thrash >> indexThrash >> thrash >> indexThrash)
 				{
-					indices.push_back(index);
+					indices.push_back(index - 1);
 				}
 
 				model.faces.push_back(indices);

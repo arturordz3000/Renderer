@@ -17,7 +17,7 @@ namespace Renderer
 
 		Model()
 		{
-			vertices.push_back(Vector3<float>(0, 0, 0));
+
 		}
 
 		void Draw(TGAImage& image, TGAColor color);

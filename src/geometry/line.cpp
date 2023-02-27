@@ -72,6 +72,8 @@ namespace Renderer
 
 		// This is the amount of error we're going to accumulate on each X.
 		// It is basically the slope of the line.
+		// It always have to be positive since we're sorting the points so that
+		// every step is an increment.
 		float deltaError = abs(deltaY / float(deltaX));
 
 		// Accumulated error
@@ -99,6 +101,8 @@ namespace Renderer
 				/*
 				* This condition derives from the inequality:
 				*			error + deltaError > 0.5
+				* where deltaError = deltaY/deltaX
+				* 
 				* Whenever we make a change in Y, it means the inequality
 				* is valid, so we have to substract the coefficient of error,
 				* which in this case is 1
@@ -133,11 +137,15 @@ namespace Renderer
 		* by 2 * deltaY. When error becomes greater than deltaX, we increment Y and substract
 		* 2 * deltaX. Let's say for now that 2 * deltaX is equivalent to the "1" that we substracted
 		* from error in drawLineBresenham2.
+		* 
+		* src: https://blog.mbedded.ninja/programming/algorithms-and-data-structures/bresenhams-line-algorithm/
 		*/ 
 
 		// This is the amount of error we're going to accumulate on each X.
 		// It is basically the slope of the line.
-		float deltaError = 2 * deltaY;
+		// It always have to be positive since we're sorting the points so that
+		// every step is an increment.
+		float deltaError = abs(2 * deltaY);
 
 		// Accumulated error
 		float error = 0;
