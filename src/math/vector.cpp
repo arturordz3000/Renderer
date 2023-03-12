@@ -57,10 +57,4 @@ namespace Renderer
 			this->y * scalar
 		);
 	}
-
-	template<class T>
-	Vector2<T> Vector2<T>::operator=(const Point& point)
-	{
-		return Vector2<T>(point.x, point.y);
-	}
 }

@@ -27,10 +27,10 @@ namespace Renderer
 
 		Vector2() {}
 		Vector2(T x, T y) : x(x), y(y) {}
+		Vector2(const Point& p) : x(p.x), y(p.y) {}
 
 		Vector2<T> operator+(const Vector2<T>& vector);
 		Vector2<T> operator-(const Vector2<T>& vector);
 		Vector2<T> operator*(const int& scalar);
-		Vector2<T> operator=(const Point& point);
 	};
 }
