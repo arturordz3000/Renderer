@@ -127,15 +127,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\application\SimpleTrianglesDemo.cpp" />
+    <ClCompile Include="src\application\ApplicationsMenu.cpp" />
     <ClCompile Include="src\application\LineDemo.cpp" />
     <ClCompile Include="src\application\WireframeDemo.cpp" />
     <ClCompile Include="src\geometry\line.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\math\vector.cpp" />
     <ClCompile Include="src\model\Model.cpp" />
     <ClCompile Include="src\model\ObjModelLoader.cpp" />
     <ClCompile Include="src\vendor\tga\tgaimage.cpp" />
+    <ClCompile Include="src\geometry\Triangle.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\application\SimpleTrianglesDemo.h" />
+    <ClInclude Include="src\application\ApplicationsMenu.h" />
     <ClInclude Include="src\application\IApplication.h" />
     <ClInclude Include="src\application\LineDemo.h" />
     <ClInclude Include="src\application\WireframeDemo.h" />
@@ -146,6 +152,7 @@
     <ClInclude Include="src\model\IModelLoader.h" />
     <ClInclude Include="src\model\ObjModelLoader.h" />
     <ClInclude Include="src\vendor\tga\tgaimage.h" />
+    <ClInclude Include="src\geometry\Triangle.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
