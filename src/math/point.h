@@ -1,13 +1,8 @@
 #pragma once
 
+#include "vector.h"
+
 namespace Renderer
 {
-	struct Point
-	{
-	public:
-		int x;
-		int y;
-
-		Point(int x, int y) : x(x), y(y) {}
-	};
+	typedef Vector2<int> Point;
 }

@@ -4,6 +4,7 @@
 #include "IApplication.h"
 #include "LineDemo.h"
 #include "WireframeDemo.h"
+#include "SimpleTrianglesDemo.h"
 #include "ApplicationsMenu.h"
 
 namespace Renderer
@@ -16,6 +17,7 @@ namespace Renderer
 		// but they are very lightweight at the moment, so it doesn't really matter.
 		applications.push_back(make_unique<LineDemo>());
 		applications.push_back(make_unique<WireframeDemo>());
+		applications.push_back(make_unique<SimpleTrianglesDemo>());
 
 		cout << "Choose application: " << endl;
 		for (int i = 0; i < applications.size(); i++)
