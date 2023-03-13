@@ -26,11 +26,11 @@ namespace Renderer
 	}
 
 	// This function draws the two boundaries (A and B) of the triangle.
-	// Segment A (red color) is from point1 to point3 
-	// Segment B (green color) is point1 to point2 and then point2 to point3
+	// Boundary A (red color) is from point1 to point3 
+	// Boundary B (green color) is point1 to point2 and then point2 to point3
 	void drawTriangle2(Point& point1, Point& point2, Point& point3, TGAImage& image, TGAColor color)
 	{
-		// In order to get the correct segments, we need to order the points
+		// In order to get the correct boundaries, we need to order the points
 		// from lower to upper using the Y-coordinate.
 		if (point1.y > point2.y) swap(point1, point2);
 		if (point1.y > point3.y) swap(point1, point3);
