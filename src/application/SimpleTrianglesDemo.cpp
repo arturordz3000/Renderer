@@ -1,6 +1,6 @@
+#include "../math/point.h"
 #include "SimpleTrianglesDemo.h"
 #include "../geometry/Triangle.h"
-#include "../math/point.h"
 #include <vector>
 
 namespace Renderer

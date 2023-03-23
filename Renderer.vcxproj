@@ -133,7 +133,6 @@
     <ClCompile Include="src\application\WireframeDemo.cpp" />
     <ClCompile Include="src\geometry\line.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\math\vector.cpp" />
     <ClCompile Include="src\model\Model.cpp" />
     <ClCompile Include="src\model\ObjModelLoader.cpp" />
     <ClCompile Include="src\vendor\tga\tgaimage.cpp" />

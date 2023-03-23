@@ -48,9 +48,6 @@
     <ClCompile Include="src\application\WireframeDemo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\math\vector.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\application\ApplicationsMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
