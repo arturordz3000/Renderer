@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\application\RandomFlatShadedModelDemo.cpp" />
     <ClCompile Include="src\application\SimpleTrianglesDemo.cpp" />
     <ClCompile Include="src\application\ApplicationsMenu.cpp" />
     <ClCompile Include="src\application\LineDemo.cpp" />
@@ -141,6 +142,7 @@
     <ClCompile Include="src\geometry\Triangle.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\application\RandomFlatShadedModelDemo.h" />
     <ClInclude Include="src\application\SimpleTrianglesDemo.h" />
     <ClInclude Include="src\application\ApplicationsMenu.h" />
     <ClInclude Include="src\application\IApplication.h" />

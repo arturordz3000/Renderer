@@ -9,6 +9,12 @@ using namespace std;
 
 namespace Renderer
 {
+	enum RenderMode
+	{
+		Wireframe,
+		FlatRandom
+	};
+
 	class Model
 	{
 	public:
@@ -20,6 +26,6 @@ namespace Renderer
 
 		}
 
-		void Draw(TGAImage& image, TGAColor color);
+		void Draw(TGAImage& image, TGAColor color, RenderMode mode = RenderMode::Wireframe);
 	};
 }
