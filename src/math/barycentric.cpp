@@ -55,7 +55,7 @@ namespace Renderer
 		*	P = (1-u-v)A + uB + vC
 		* Here, we return the point now that we have the u and v values.
 		* u and v are the x and y components of the cross product,
-		* and they are divided by z in order to be "normalized" from 0 to 1.
+		* and they are... divided by z in order to be "normalized" from 0 to 1? Not sure about this.
 		*/
 		return Vector3<float>(1.0f - (result.x + result.y) / result.z, result.y / result.z, result.x / result.z);
 	}

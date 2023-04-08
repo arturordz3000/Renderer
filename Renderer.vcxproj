@@ -131,9 +131,9 @@
     <ClCompile Include="src\application\ApplicationsMenu.cpp" />
     <ClCompile Include="src\application\LineDemo.cpp" />
     <ClCompile Include="src\application\WireframeDemo.cpp" />
-    <ClCompile Include="src\geometry\line.cpp" />
+    <ClCompile Include="src\geometry\Line.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\math\barycentric.cpp" />
+    <ClCompile Include="src\math\Barycentric.cpp" />
     <ClCompile Include="src\model\Model.cpp" />
     <ClCompile Include="src\model\ObjModelLoader.cpp" />
     <ClCompile Include="src\vendor\tga\tgaimage.cpp" />
@@ -145,10 +145,10 @@
     <ClInclude Include="src\application\IApplication.h" />
     <ClInclude Include="src\application\LineDemo.h" />
     <ClInclude Include="src\application\WireframeDemo.h" />
-    <ClInclude Include="src\geometry\line.h" />
-    <ClInclude Include="src\math\barycentric.h" />
-    <ClInclude Include="src\math\point.h" />
-    <ClInclude Include="src\math\vector.h" />
+    <ClInclude Include="src\geometry\Line.h" />
+    <ClInclude Include="src\math\Barycentric.h" />
+    <ClInclude Include="src\math\Point.h" />
+    <ClInclude Include="src\math\Vector.h" />
     <ClInclude Include="src\model\Model.h" />
     <ClInclude Include="src\model\IModelLoader.h" />
     <ClInclude Include="src\model\ObjModelLoader.h" />
