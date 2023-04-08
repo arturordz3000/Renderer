@@ -7,6 +7,6 @@ namespace Renderer
 	{
 	public:
 		int Start() override;
-		string virtual GetTitle() { return "RandomFlatShadedModelDemo Demo"; }
+		string virtual GetTitle() { return "RandomFlatShadedModel Demo"; }
 	};
 }

@@ -1,4 +1,5 @@
 #pragma once
+#include <cmath>
 
 namespace Renderer 
 {
@@ -16,12 +17,27 @@ namespace Renderer
 
 		Vector3<T> operator-(const Vector3<T>& vector);
 
+		Vector3<T> operator-();
+
 		Vector3<T> operator^(const Vector3<T>& vector);
 
 		template<typename U>
 		Vector3<T> operator*(const U& scalar);
 
-		static Vector3<T> crossProduct(const Vector3<T>& vector1, const Vector3<T>& vector2);
+		template<typename U>
+		T operator*(const Vector3<U>& otherVector);
+
+		static Vector3<T> CrossProduct(const Vector3<T>& vector1, const Vector3<T>& vector2);
+
+		void Normalize()
+		{
+			T magnitude = std::sqrt(x * x + y * y + z * z);
+
+			this->x = this->x / magnitude;
+			this->y = this->y / magnitude;
+			this->z = this->z / magnitude;
+
+		}
 	};
 
 	template<class T> class Vector2
@@ -62,7 +78,17 @@ namespace Renderer
 	}
 
 	template<class T>
-	Vector3<T> Vector3<T>::crossProduct(const Vector3<T>& vector1, const Vector3<T>& vector2)
+	Vector3<T> Vector3<T>::operator-()
+	{
+		return Vector3<T>(
+			-this->x,
+			-this->y,
+			-this->z
+			);
+	}
+
+	template<class T>
+	Vector3<T> Vector3<T>::CrossProduct(const Vector3<T>& vector1, const Vector3<T>& vector2)
 	{
 		T scalar1 = vector1.y * vector2.z - vector1.z * vector2.y;
 		T scalar2 = vector1.z * vector2.x - vector1.x * vector2.z;
@@ -80,6 +106,13 @@ namespace Renderer
 			this->y * scalar,
 			this->z * scalar
 			);
+	}
+
+	template<class T>
+	template<typename U>
+	T Vector3<T>::operator*(const Vector3<U>& otherVector)
+	{
+		return this->x * otherVector.x + this->y * otherVector.y + this->z * otherVector.z;
 	}
 
 	template<class T>
@@ -113,6 +146,6 @@ namespace Renderer
 	template<class T>
 	Vector3<T> Vector3<T>::operator^(const Vector3<T>& vector)
 	{
-		return Vector3<T>::crossProduct(*this, vector);
+		return Vector3<T>::CrossProduct(*this, vector);
 	}
 }

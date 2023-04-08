@@ -66,6 +66,9 @@
     <ClCompile Include="src\application\RandomFlatShadedModelDemo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\application\LightShadedModelDemo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\vendor\tga\tgaimage.h">
@@ -114,6 +117,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\application\RandomFlatShadedModelDemo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\application\LightShadedModelDemo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

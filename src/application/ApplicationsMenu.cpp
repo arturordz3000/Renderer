@@ -7,6 +7,7 @@
 #include "SimpleTrianglesDemo.h"
 #include "ApplicationsMenu.h"
 #include "RandomFlatShadedModelDemo.h"
+#include "LightShadedModelDemo.h"
 
 namespace Renderer
 {
@@ -20,6 +21,7 @@ namespace Renderer
 		applications.push_back(make_unique<WireframeDemo>());
 		applications.push_back(make_unique<SimpleTrianglesDemo>());
 		applications.push_back(make_unique<RandomFlatShadedModelDemo>());
+		applications.push_back(make_unique<LightShadedModelDemo>());
 
 		cout << "Choose application: " << endl;
 		for (int i = 0; i < applications.size(); i++)

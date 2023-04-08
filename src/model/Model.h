@@ -12,7 +12,8 @@ namespace Renderer
 	enum RenderMode
 	{
 		Wireframe,
-		FlatRandom
+		FlatRandom,
+		FlatLight
 	};
 
 	class Model
@@ -20,6 +21,7 @@ namespace Renderer
 	public:
 		vector<Vector3<float>> vertices;
 		vector<vector<int>> faces;
+		Vector3<float> lightDirection;
 
 		Model()
 		{
@@ -27,5 +29,9 @@ namespace Renderer
 		}
 
 		void Draw(TGAImage& image, TGAColor color, RenderMode mode = RenderMode::Wireframe);
+		void SetLightDirection(const Vector3<float>& lightDirection)
+		{
+			this->lightDirection = lightDirection;
+		}
 	};
 }

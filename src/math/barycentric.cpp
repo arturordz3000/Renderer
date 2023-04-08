@@ -39,7 +39,7 @@ namespace Renderer
 		*/
 		Vector3<float> xComponents(ab.x, ac.x, pa.x);
 		Vector3<float> yComponents(ab.y, ac.y, pa.y);
-		auto result = Vector3<float>::crossProduct(xComponents, yComponents);
+		auto result = Vector3<float>::CrossProduct(xComponents, yComponents);
 
 		/**
 		* If the abs(z) component of the cross product is less than 1,

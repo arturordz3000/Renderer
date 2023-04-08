@@ -7,6 +7,8 @@
 
 namespace Renderer
 {
+	float computeLightIntensity(const std::vector<Vector3<float>>& triangle, Vector3<float> &lightDirection, const TGAImage& image);
+
 	void Model::Draw(TGAImage &image, TGAColor color, RenderMode mode)
 	{
 		int viewportWidth = image.get_width();
@@ -27,13 +29,40 @@ namespace Renderer
 			switch (mode)
 			{
 			case RenderMode::FlatRandom:
+			{
 				drawTriangle({ point1, point2, point3 }, image, TGAColor(rand() % 255, rand() % 255, rand() % 255, 255));
 				break;
+			}
+			case RenderMode::FlatLight:
+			{
+				float lightIntensity = computeLightIntensity({ vertex1, vertex2, vertex3 }, this->lightDirection, image);
+				if (lightIntensity > 0)
+				{
+					drawTriangle({ point1, point2, point3 }, image, TGAColor(color.r * lightIntensity, color.g * lightIntensity, color.b * lightIntensity, color.a));
+				}
+				break;
+			}
 			default:
 				drawLine(point1, point2, image, color);
 				drawLine(point2, point3, image, color);
 				drawLine(point3, point1, image, color);
 			}
 		}
+	}
+
+	float computeLightIntensity(const std::vector<Vector3<float>>& triangle, Vector3<float> &lightDirection, const TGAImage& image)
+	{
+		Vector3<float> a = triangle[0];
+		Vector3<float> b = triangle[1];
+		Vector3<float> c = triangle[2];
+
+		Vector3<float> ab = b - a;
+		Vector3<float> ac = c - a;
+
+		auto result = Vector3<float>::CrossProduct(ab, ac);
+		result.Normalize();
+		float lightIntensity = result * -lightDirection;
+
+		return lightIntensity;
 	}
 }
