@@ -62,7 +62,7 @@ namespace Renderer
 	}
 
 	template<class T>
-	static Vector3<T> Vector3<T>::crossProduct(const Vector3<T>& vector1, const Vector3<T>& vector2)
+	Vector3<T> Vector3<T>::crossProduct(const Vector3<T>& vector1, const Vector3<T>& vector2)
 	{
 		T scalar1 = vector1.y * vector2.z - vector1.z * vector2.y;
 		T scalar2 = vector1.z * vector2.x - vector1.x * vector2.z;

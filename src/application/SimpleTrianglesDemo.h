@@ -7,6 +7,6 @@ namespace Renderer
 	{
 	public:
 		int Start() override;
-		string virtual GetTitle() { return "Simple Triangles Menu"; }
+		string virtual GetTitle() { return "Simple Triangles Demo"; }
 	};
 }

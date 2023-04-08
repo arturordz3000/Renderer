@@ -1,10 +1,10 @@
 #pragma once
 
-#include "vector.h"
 #include <vector>
+#include "vector.h"
+#include "Point.h"
 
-namespace Renderer
-{
-	template<class T>
-	Vector3<float> computeBarycentricVector(std::vector<Vector3<T>>& trianglePoints, Vector3<T> point);
-}
+namespace Renderer	
+{	
+	Vector3<float> computeBarycentricVector(const std::vector<Point>& triangleVertices, const Point &point);
+}	

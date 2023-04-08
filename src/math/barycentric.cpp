@@ -4,22 +4,24 @@ namespace Renderer
 {
 	const Vector3<float> INVALID_VECTOR(-1, 1, 1);
 
-	template<class T>
-	Vector3<float> computeBarycentricVector(std::vector<Vector3<T>> &trianglePoints, Vector3<T> point)
+	Vector3<float> computeBarycentricVector(const std::vector<Point> &triangleVertices, const Point &point)
 	{
 		/**
 		* In a triangle, we have points A, B and C. In order to detect that a point (P) resides in a triangle ABC,
 		* we first need to compute the vectors AB, AC and PA
 		**/
-		Vector3<T> ab = trianglePoints[1] - trianglePoints[0];
-		Vector3<T> ac = trianglePoints[2] - trianglePoints[0];
-		Vector3<T> pa = trianglePoints[0] - point;
+		Point a = triangleVertices[0];
+		Point b = triangleVertices[1];
+		Point c = triangleVertices[2];
+		Point ab = b - a;
+		Point ac = c - a;
+		Point pa = a - point;
 
 		/**
 		* The Barycentric coordinates say that if a point (P) is inside a triangle,
 		* it has to comply with the following formula:
 		*	P = A + uAB + vAC
-		* where u and v are the weights of each of the vectors.
+		* where u and v are the weights of each of the vectors and they have values between 0 and 1
 		* 
 		* The formula above can also be stated as follows:
 		*	uAB + vAC + PA = 0
@@ -42,7 +44,8 @@ namespace Renderer
 		/**
 		* If the abs(z) component of the cross product is less than 1,
 		* that means that is most likely 0.
-		* Basically, we have a degenerate triangle, so we return an invalid vector (a vector with one negative component)
+		* Basically, we have a degenerate triangle, so we return an invalid vector (a vector with one negative component).
+		* A degenerate triangle has all three of its vertices lying on the same straight line, so the triangle is squashed completely flat:
 		* https://undergroundmathematics.org/glossary/degenerate#:~:text=A%20degenerate%20triangle%20has%20all,triangle%20is%20squashed%20completely%20flat.
 		*/
 		if (abs(result.z) < 1)

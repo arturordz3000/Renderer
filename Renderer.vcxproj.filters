@@ -60,6 +60,9 @@
     <ClCompile Include="src\math\Barycentric.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\math\BoundingBox2d.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\vendor\tga\tgaimage.h">
@@ -102,6 +105,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\math\Barycentric.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\math\BoundingBox2d.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
