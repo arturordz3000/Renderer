@@ -55,7 +55,21 @@ namespace Renderer
 
 		/**
 		* The original Barycentric coordinates formula is:
+		*	P = A + uB + vC
+		* which can be converted to:
+		*	P = uA + vAB + wAC
+		* However, we usually like to represent the equation as:
+		*	P = wA + uAB + vAC
+		* That's because if we expand the the original equation we get:
+		*	P = A + uAB + vAC
+		*	P = A + u(B-A) + v(C-A)
+		*	P = A + uB - uA + vC - vA
+		* Let's reorder the elements:
+		*	P = A - uA - vA + uB + vC
+		* and we factorize it:
 		*	P = (1-u-v)A + uB + vC
+		* 1-u-v comes from the fact that the sum of u + v + w = 1, which means that u + v <= 1,
+		* so w can be converted to 1 - u - v. A more detailed explanation can be found here: https://www.scratchapixel.com/lessons/3d-basic-rendering/ray-tracing-rendering-a-triangle/barycentric-coordinates.html
 		* Here, we return the point now that we have the u and v values.
 		* u and v are the x and y components of the cross product,
 		* and they are... divided by z in order to be "normalized" from 0 to 1? Not sure about this.
