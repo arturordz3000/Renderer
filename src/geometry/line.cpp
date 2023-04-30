@@ -11,6 +11,29 @@ namespace Renderer
 		drawLineBresenham3(point1, point2, image, color);
 	}
 
+	void rasterize(Point point1, Point point2, TGAImage& image, TGAColor color, int yBuffer[])
+	{
+		// This logic is somewhat similar to bresenham1. Here we're using it only for getting
+		// the zBuffer (yBuffer in 2d)
+		if (point1.x > point2.x) 
+		{
+			std::swap(point1.x, point2.x);
+			std::swap(point1.y, point2.y);
+		}
+
+		for (int x = point1.x; x <= point2.x; x++)
+		{
+			float t = (x - point1.x) / (float)(point2.x - point1.x);
+			int y = point1.y * (1.0 - t) + point2.y * t;
+
+			if (y > yBuffer[x])
+			{
+				yBuffer[x] = y;
+				image.set(x, 0, color);
+			}
+		}
+	}
+
 	bool sortPoints(Point& point1, Point& point2)
 	{
 		int dx = abs(point1.x - point2.x);

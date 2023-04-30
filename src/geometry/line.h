@@ -5,4 +5,5 @@
 namespace Renderer 
 {
 	void drawLine(Point point1, Point point2, TGAImage& image, TGAColor color);
+	void rasterize(Point point1, Point point2, TGAImage& image, TGAColor color, int yBuffer[]);
 }

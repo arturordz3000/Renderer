@@ -8,6 +8,7 @@
 #include "ApplicationsMenu.h"
 #include "RandomFlatShadedModelDemo.h"
 #include "LightShadedModelDemo.h"
+#include "ZBuffer2dDemo.h"
 
 namespace Renderer
 {
@@ -22,6 +23,7 @@ namespace Renderer
 		applications.push_back(make_unique<SimpleTrianglesDemo>());
 		applications.push_back(make_unique<RandomFlatShadedModelDemo>());
 		applications.push_back(make_unique<LightShadedModelDemo>());
+		applications.push_back(make_unique<ZBuffer2dDemo>());
 
 		cout << "Choose application: " << endl;
 		for (int i = 0; i < applications.size(); i++)
