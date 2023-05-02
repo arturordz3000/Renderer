@@ -22,31 +22,66 @@ namespace Renderer
 			Vector3<float> vertex2 = this->vertices[this->faces[i][1]];
 			Vector3<float> vertex3 = this->vertices[this->faces[i][2]];
 
-			// Converting from <-width to +width> to <0 to +width>
-			Point point1((vertex1.x + 1.) * viewportWidth / 2., (vertex1.y + 1.) * viewportHeight / 2.);
-			Point point2((vertex2.x + 1.) * viewportWidth / 2., (vertex2.y + 1.) * viewportHeight / 2.);
-			Point point3((vertex3.x + 1.) * viewportWidth / 2., (vertex3.y + 1.) * viewportHeight / 2.);
-
 			switch (mode)
 			{
-			case RenderMode::FlatRandom:
-			{
-				drawTriangle({ point1, point2, point3 }, image, TGAColor(rand() % 255, rand() % 255, rand() % 255, 255));
-				break;
-			}
-			case RenderMode::FlatLight:
-			{
-				float lightIntensity = computeLightIntensity({ vertex1, vertex2, vertex3 }, this->lightDirection, image);
-				if (lightIntensity > 0)
+				case RenderMode::FlatRandom:
 				{
-					drawTriangle({ point1, point2, point3 }, image, TGAColor(color.r * lightIntensity, color.g * lightIntensity, color.b * lightIntensity, color.a));
+					// Converting from <-width to +width> to <0 to +width>
+					Point point1((vertex1.x + 1.) * viewportWidth / 2., (vertex1.y + 1.) * viewportHeight / 2.);
+					Point point2((vertex2.x + 1.) * viewportWidth / 2., (vertex2.y + 1.) * viewportHeight / 2.);
+					Point point3((vertex3.x + 1.) * viewportWidth / 2., (vertex3.y + 1.) * viewportHeight / 2.);
+
+					drawTriangle({ point1, point2, point3 }, image, TGAColor(rand() % 255, rand() % 255, rand() % 255, 255));
+					break;
 				}
-				break;
-			}
-			default:
-				drawLine(point1, point2, image, color);
-				drawLine(point2, point3, image, color);
-				drawLine(point3, point1, image, color);
+				case RenderMode::FlatLight:
+				{
+					// Converting from <-width to +width> to <0 to +width>
+					Point point1((vertex1.x + 1.) * viewportWidth / 2., (vertex1.y + 1.) * viewportHeight / 2.);
+					Point point2((vertex2.x + 1.) * viewportWidth / 2., (vertex2.y + 1.) * viewportHeight / 2.);
+					Point point3((vertex3.x + 1.) * viewportWidth / 2., (vertex3.y + 1.) * viewportHeight / 2.);
+
+					float lightIntensity = computeLightIntensity({ vertex1, vertex2, vertex3 }, this->lightDirection, image);
+					if (lightIntensity > 0)
+					{
+						drawTriangle({ point1, point2, point3 }, image, TGAColor(color.r * lightIntensity, color.g * lightIntensity, color.b * lightIntensity, color.a));
+					}
+					break;
+				}
+				case RenderMode::ZBuffer:
+				{
+					// Converting from <-width to +width> to <0 to +width>
+					Vector3<float> point1((vertex1.x + 1.) * viewportWidth / 2., (vertex1.y + 1.) * viewportHeight / 2., vertex1.z);
+					Vector3<float> point2((vertex2.x + 1.) * viewportWidth / 2., (vertex2.y + 1.) * viewportHeight / 2., vertex2.z);
+					Vector3<float> point3((vertex3.x + 1.) * viewportWidth / 2., (vertex3.y + 1.) * viewportHeight / 2., vertex3.z);
+
+					int pixelsCount = viewportWidth * viewportHeight;
+					float* zBuffer = new float[pixelsCount];
+
+					for (int i = 0; i < pixelsCount; i++)
+					{
+						zBuffer[i] = -std::numeric_limits<float>::max();
+					}
+
+					float lightIntensity = computeLightIntensity({ vertex1, vertex2, vertex3 }, this->lightDirection, image);
+					if (lightIntensity > 0)
+					{
+						drawTriangle({ point1, point2, point3 }, zBuffer, image, TGAColor(color.r * lightIntensity, color.g * lightIntensity, color.b * lightIntensity, color.a));
+					}
+
+					break;
+				}
+				default:
+				{
+					// Converting from <-width to +width> to <0 to +width>
+					Point point1((vertex1.x + 1.) * viewportWidth / 2., (vertex1.y + 1.) * viewportHeight / 2.);
+					Point point2((vertex2.x + 1.) * viewportWidth / 2., (vertex2.y + 1.) * viewportHeight / 2.);
+					Point point3((vertex3.x + 1.) * viewportWidth / 2., (vertex3.y + 1.) * viewportHeight / 2.);
+
+					drawLine(point1, point2, image, color);
+					drawLine(point2, point3, image, color);
+					drawLine(point3, point1, image, color);
+				}
 			}
 		}
 	}

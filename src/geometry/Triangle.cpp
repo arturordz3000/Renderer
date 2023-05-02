@@ -2,6 +2,7 @@
 #include "Triangle.h"
 #include "line.h"
 #include "../math/BoundingBox2d.h"
+#include "../math/BoundingBox3d.h"
 #include "../math/Barycentric.h"
 
 namespace Renderer
@@ -10,6 +11,7 @@ namespace Renderer
 	void drawTriangle2(Point& point1, Point& point2, Point& point3, TGAImage& image, TGAColor color);
 	void drawTriangle3(Point& point1, Point& point2, Point& point3, TGAImage& image, TGAColor color);
 	void drawTriangle4(Point& point1, Point& point2, Point& point3, TGAImage& image, TGAColor color);
+	void rasterizeTriangle(const std::vector<Vector3<float>>& triangle, float* zBuffer, TGAImage& image, TGAColor color);
 
 	void drawTriangle(Point& point1, Point& point2, Point& point3, TGAImage& image, TGAColor color)
 	{
@@ -19,6 +21,11 @@ namespace Renderer
 	void drawTriangle(vector<Point> triangle, TGAImage& image, TGAColor color)
 	{
 		drawTriangle(triangle[0], triangle[1], triangle[2], image, color);
+	}
+
+	void drawTriangle(vector<Vector3<float>> triangle, float *zBuffer, TGAImage& image, TGAColor color)
+	{
+		rasterizeTriangle(triangle, zBuffer, image, color);
 	}
 
 	// In order to get the correct boundaries, we need to sort the points
@@ -114,7 +121,7 @@ namespace Renderer
 	}
 
 	// Checks if point is inside a triangle using barycentric coordinates.
-	bool isPointInside(const std::vector<Point> triangle, const Point& point)
+	bool shouldRender(const std::vector<Point> triangle, const Point& point)
 	{
 		Vector3<float> barycentricCoordinate = computeBarycentricVector(triangle, point);
 
@@ -122,6 +129,29 @@ namespace Renderer
 			return false;
 
 		return true;
+	}
+
+	// Checks if point is inside a triangle using barycentric coordinates taking 3d coordinates.
+	bool shouldRender(const std::vector<Vector3<float>>& triangle, const Vector3<float>& point, float *zBuffer, int width)
+	{
+		Vector3<float> barycentricCoordinate = computeBarycentricVector(triangle, point);
+
+		if (barycentricCoordinate.x < 0 || barycentricCoordinate.y < 0 || barycentricCoordinate.z < 0)
+			return false;
+
+		float z = 0;
+		z += triangle[0].z * barycentricCoordinate.x;
+		z += triangle[1].z * barycentricCoordinate.y;
+		z += triangle[2].z * barycentricCoordinate.z;
+
+		int zBufferIndex = int(point.x + point.y * width);
+		if (zBuffer[zBufferIndex] < z)
+		{
+			zBuffer[zBufferIndex] = z;
+			return true;
+		}
+
+		return false;
 	}
 
 	// This function draws the triangle using barycentric coordinates and bounding box.
@@ -134,7 +164,22 @@ namespace Renderer
 		{
 			for (int y = boundingBox.minPoint.y; y < boundingBox.maxPoint.y; y++)
 			{
-				if (isPointInside(triangle, Point(x, y)))
+				if (shouldRender(triangle, Point(x, y)))
+					image.set(x, y, color);
+			}
+		}
+	}
+
+	// This function draws the triangle using a z buffer for face culling
+	void rasterizeTriangle(const std::vector<Vector3<float>>& triangle, float *zBuffer, TGAImage& image, TGAColor color)
+	{
+		BoundingBox3d boundingBox(triangle, Vector2<float>(image.get_width() - 1, image.get_height() - 1));
+
+		for (int x = boundingBox.minPoint.x; x < boundingBox.maxPoint.x; x++)
+		{
+			for (int y = boundingBox.minPoint.y; y < boundingBox.maxPoint.y; y++)
+			{
+				if (shouldRender(triangle, Vector3<float>(x, y, 0), zBuffer, image.get_width()))
 					image.set(x, y, color);
 			}
 		}

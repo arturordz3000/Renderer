@@ -76,4 +76,26 @@ namespace Renderer
 		*/
 		return Vector3<float>(1.0f - (result.x + result.y) / result.z, result.y / result.z, result.x / result.z);
 	}
+
+	// Same as the above, but taking 3d coordinates
+	Vector3<float> computeBarycentricVector(const std::vector<Vector3<float>>& triangleVertices, const Vector3<float>& point)
+	{
+		Vector3<float> a = triangleVertices[0];
+		Vector3<float> b = triangleVertices[1];
+		Vector3<float> c = triangleVertices[2];
+		Vector3<float> ab = b - a;
+		Vector3<float> ac = c - a;
+		Vector3<float> pa = a - point;
+
+		Vector3<float> xComponents(ab.x, ac.x, pa.x);
+		Vector3<float> yComponents(ab.y, ac.y, pa.y);
+		auto result = Vector3<float>::CrossProduct(xComponents, yComponents);
+
+		if (abs(result.z) < 1)
+		{
+			return INVALID_VECTOR;
+		}
+
+		return Vector3<float>(1.0f - (result.x + result.y) / result.z, result.y / result.z, result.x / result.z);
+	}
 }

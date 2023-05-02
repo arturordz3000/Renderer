@@ -13,7 +13,8 @@ namespace Renderer
 	{
 		Wireframe,
 		FlatRandom,
-		FlatLight
+		FlatLight,
+		ZBuffer
 	};
 
 	class Model
