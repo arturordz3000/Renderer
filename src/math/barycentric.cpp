@@ -1,4 +1,7 @@
 #include "barycentric.h"
+#include <iostream>
+
+using namespace std;
 
 namespace Renderer 
 {
@@ -87,15 +90,16 @@ namespace Renderer
 		Vector3<float> ac = c - a;
 		Vector3<float> pa = a - point;
 
-		Vector3<float> xComponents(ab.x, ac.x, pa.x);
-		Vector3<float> yComponents(ab.y, ac.y, pa.y);
+		Vector3<float> xComponents(ac.x, ab.x, pa.x);
+		Vector3<float> yComponents(ac.y, ab.y, pa.y);
 		auto result = Vector3<float>::CrossProduct(xComponents, yComponents);
 
-		if (abs(result.z) < 1)
-		{
-			return INVALID_VECTOR;
-		}
+		//cout << "bary : " << result.x << " " << result.y << " " << result.z << endl;
 
-		return Vector3<float>(1.0f - (result.x + result.y) / result.z, result.y / result.z, result.x / result.z);
+		if (abs(result.z) > 1e-2)
+		{
+			return Vector3<float>(1.0f - (result.x + result.y) / result.z, result.y / result.z, result.x / result.z);
+		}
+		return INVALID_VECTOR;
 	}
 }

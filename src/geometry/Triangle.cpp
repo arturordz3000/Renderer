@@ -4,6 +4,7 @@
 #include "../math/BoundingBox2d.h"
 #include "../math/BoundingBox3d.h"
 #include "../math/Barycentric.h"
+#include <iostream>
 
 namespace Renderer
 {
@@ -11,7 +12,7 @@ namespace Renderer
 	void drawTriangle2(Point& point1, Point& point2, Point& point3, TGAImage& image, TGAColor color);
 	void drawTriangle3(Point& point1, Point& point2, Point& point3, TGAImage& image, TGAColor color);
 	void drawTriangle4(Point& point1, Point& point2, Point& point3, TGAImage& image, TGAColor color);
-	void rasterizeTriangle(const std::vector<Vector3<float>>& triangle, float* zBuffer, TGAImage& image, TGAColor color);
+	void rasterizeTriangle(std::vector<Vector3<float>>& triangle, float* zBuffer, TGAImage& image, TGAColor color);
 
 	void drawTriangle(Point& point1, Point& point2, Point& point3, TGAImage& image, TGAColor color)
 	{
@@ -136,8 +137,10 @@ namespace Renderer
 	{
 		Vector3<float> barycentricCoordinate = computeBarycentricVector(triangle, point);
 
-		if (barycentricCoordinate.x < 0 || barycentricCoordinate.y < 0 || barycentricCoordinate.z < 0)
+		if (barycentricCoordinate.x < 0 || barycentricCoordinate.y < 0 || barycentricCoordinate.z < 0) {
+			//cout << "Degenerate" << endl;
 			return false;
+		}
 
 		float z = 0;
 		z += triangle[0].z * barycentricCoordinate.x;
@@ -148,9 +151,11 @@ namespace Renderer
 		if (zBuffer[zBufferIndex] < z)
 		{
 			zBuffer[zBufferIndex] = z;
+			//cout << "Rendered" << endl;
 			return true;
 		}
 
+		//cout << "Culled" << endl;
 		return false;
 	}
 
@@ -171,16 +176,22 @@ namespace Renderer
 	}
 
 	// This function draws the triangle using a z buffer for face culling
-	void rasterizeTriangle(const std::vector<Vector3<float>>& triangle, float *zBuffer, TGAImage& image, TGAColor color)
+	void rasterizeTriangle(std::vector<Vector3<float>>& triangle, float *zBuffer, TGAImage& image, TGAColor color)
 	{
 		BoundingBox3d boundingBox(triangle, Vector2<float>(image.get_width() - 1, image.get_height() - 1));
 
-		for (int x = boundingBox.minPoint.x; x < boundingBox.maxPoint.x; x++)
+		for (int x = boundingBox.minPoint.x; x <= boundingBox.maxPoint.x; x++)
 		{
-			for (int y = boundingBox.minPoint.y; y < boundingBox.maxPoint.y; y++)
+			for (int y = boundingBox.minPoint.y; y <= boundingBox.maxPoint.y; y++)
 			{
+				int index = int(x + y * image.get_width());
 				if (shouldRender(triangle, Vector3<float>(x, y, 0), zBuffer, image.get_width()))
-					image.set(x, y, color);
+				{
+					int index = int(x + y * image.get_width());
+					//cout << index << " " << zBuffer[index] << endl;
+					int colorValue = int((1.0f + zBuffer[index]) / 2.0f * 255);
+					image.set(x, y, TGAColor(colorValue, colorValue, colorValue, 1));
+				}
 			}
 		}
 	}

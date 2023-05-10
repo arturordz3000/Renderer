@@ -4,8 +4,8 @@ namespace Renderer
 {
 	BoundingBox3d::BoundingBox3d(const std::vector<Vector3<float>>& points, const Vector2<float>& limit)
 	{
-		minPoint = Vector2<float>(limit.x, limit.y);
-		maxPoint = Vector2<float>(0, 0);
+		minPoint = Vector2<float>(std::numeric_limits<float>::max(), std::numeric_limits<float>::max());
+		maxPoint = Vector2<float>(-std::numeric_limits<float>::max(), -std::numeric_limits<float>::max());
 
 		for (int i = 0; i < points.size(); i++)
 		{

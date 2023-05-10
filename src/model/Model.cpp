@@ -51,9 +51,9 @@ namespace Renderer
 				case RenderMode::ZBuffer:
 				{
 					// Converting from <-width to +width> to <0 to +width>
-					Vector3<float> point1((vertex1.x + 1.) * viewportWidth / 2., (vertex1.y + 1.) * viewportHeight / 2., vertex1.z);
-					Vector3<float> point2((vertex2.x + 1.) * viewportWidth / 2., (vertex2.y + 1.) * viewportHeight / 2., vertex2.z);
-					Vector3<float> point3((vertex3.x + 1.) * viewportWidth / 2., (vertex3.y + 1.) * viewportHeight / 2., vertex3.z);
+					Vector3<float> point1(int((vertex1.x + 1.) * viewportWidth / 2. + .5), int((vertex1.y + 1.) * viewportHeight / 2. + .5), vertex1.z);
+					Vector3<float> point2(int((vertex2.x + 1.) * viewportWidth / 2. + .5), int((vertex2.y + 1.) * viewportHeight / 2. + .5), vertex2.z);
+					Vector3<float> point3(int((vertex3.x + 1.) * viewportWidth / 2. + .5), int((vertex3.y + 1.) * viewportHeight / 2. + .5), vertex3.z);
 
 					int pixelsCount = viewportWidth * viewportHeight;
 					float* zBuffer = new float[pixelsCount];
