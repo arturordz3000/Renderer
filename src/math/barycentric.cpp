@@ -81,13 +81,13 @@ namespace Renderer
 	}
 
 	// Same as the above, but taking 3d coordinates
-	Vector3<float> computeBarycentricVector(const std::vector<Vector3<float>>& triangleVertices, const Vector3<float>& point)
+	Vector3<float> computeBarycentricVector(const std::vector<Vector3<float>>& triangleVertices, Vector3<float>& point)
 	{
 		Vector3<float> a = triangleVertices[0];
 		Vector3<float> b = triangleVertices[1];
 		Vector3<float> c = triangleVertices[2];
-		Vector3<float> ab = b - a;
 		Vector3<float> ac = c - a;
+		Vector3<float> ab = b - a;
 		Vector3<float> pa = a - point;
 
 		Vector3<float> xComponents(ac.x, ab.x, pa.x);
@@ -100,6 +100,8 @@ namespace Renderer
 		{
 			return Vector3<float>(1.0f - (result.x + result.y) / result.z, result.y / result.z, result.x / result.z);
 		}
+
+		// Getting a value less than 0 means that the point lies outside of the triangle.
 		return INVALID_VECTOR;
 	}
 }

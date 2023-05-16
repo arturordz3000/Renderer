@@ -16,6 +16,14 @@ namespace Renderer
 
 		int numberOfFaces = this->faces.size();
 
+		int pixelsCount = viewportWidth * viewportHeight;
+		float* zBuffer = new float[pixelsCount];
+
+		for (int i = 0; i < pixelsCount; i++)
+		{
+			zBuffer[i] = -std::numeric_limits<float>::max();
+		}
+
 		for (int i = 0; i < numberOfFaces; i++)
 		{
 			Vector3<float> vertex1 = this->vertices[this->faces[i][0]];
@@ -54,14 +62,6 @@ namespace Renderer
 					Vector3<float> point1(int((vertex1.x + 1.) * viewportWidth / 2. + .5), int((vertex1.y + 1.) * viewportHeight / 2. + .5), vertex1.z);
 					Vector3<float> point2(int((vertex2.x + 1.) * viewportWidth / 2. + .5), int((vertex2.y + 1.) * viewportHeight / 2. + .5), vertex2.z);
 					Vector3<float> point3(int((vertex3.x + 1.) * viewportWidth / 2. + .5), int((vertex3.y + 1.) * viewportHeight / 2. + .5), vertex3.z);
-
-					int pixelsCount = viewportWidth * viewportHeight;
-					float* zBuffer = new float[pixelsCount];
-
-					for (int i = 0; i < pixelsCount; i++)
-					{
-						zBuffer[i] = -std::numeric_limits<float>::max();
-					}
 
 					float lightIntensity = computeLightIntensity({ vertex1, vertex2, vertex3 }, this->lightDirection, image);
 					if (lightIntensity > 0)

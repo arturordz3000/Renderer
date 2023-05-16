@@ -133,7 +133,7 @@ namespace Renderer
 	}
 
 	// Checks if point is inside a triangle using barycentric coordinates taking 3d coordinates.
-	bool shouldRender(const std::vector<Vector3<float>>& triangle, const Vector3<float>& point, float *zBuffer, int width)
+	bool shouldRender(const std::vector<Vector3<float>>& triangle, Vector3<float>& point, float *zBuffer, int width)
 	{
 		Vector3<float> barycentricCoordinate = computeBarycentricVector(triangle, point);
 
@@ -185,12 +185,16 @@ namespace Renderer
 			for (int y = boundingBox.minPoint.y; y <= boundingBox.maxPoint.y; y++)
 			{
 				int index = int(x + y * image.get_width());
-				if (shouldRender(triangle, Vector3<float>(x, y, 0), zBuffer, image.get_width()))
+				auto point = Vector3<float>(x, y, 0);
+				if (shouldRender(triangle, point, zBuffer, image.get_width()))
 				{
 					int index = int(x + y * image.get_width());
 					//cout << index << " " << zBuffer[index] << endl;
-					int colorValue = int((1.0f + zBuffer[index]) / 2.0f * 255);
-					image.set(x, y, TGAColor(colorValue, colorValue, colorValue, 1));
+
+					// Uncomment the line below to visualize the z-buffer
+					//int colorValue = int((1.0f + zBuffer[index]) / 2.0f * 255);
+
+					image.set(x, y, color);
 				}
 			}
 		}

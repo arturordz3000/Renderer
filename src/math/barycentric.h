@@ -7,5 +7,5 @@
 namespace Renderer	
 {	
 	Vector3<float> computeBarycentricVector(const std::vector<Point>& triangleVertices, const Point &point);
-	Vector3<float> computeBarycentricVector(const std::vector<Vector3<float>>& triangleVertices, const Vector3<float>& point);
+	Vector3<float> computeBarycentricVector(const std::vector<Vector3<float>>& triangleVertices, Vector3<float>& point);
 }	
