@@ -42,6 +42,19 @@ namespace Renderer
 				lineStream >> vertex.x >> vertex.y >> vertex.z;
 				model.vertices.push_back(vertex);
 			}
+			else if (line.compare(0, 3, "vt ") == 0)
+			{
+				// We expect a line like: vt 1.0 1.0 0.0
+
+				// Getting rid of the initial "vt" characters.
+				lineStream >> thrash >> thrash;
+
+				Vector2<float> uv;
+				float uvThrash = 0;
+
+				lineStream >> uv.x >> uv.y >> uvThrash;
+				model.uv.push_back(uv);
+			}
 			else if (line.compare(0, 2, "f ") == 0)
 			{
 				// We expect a line like: f 6/4/1 3/5/3 7/6/5
@@ -54,17 +67,22 @@ namespace Renderer
 				// In this example, we will be reading 6/4/1, then 3/5/3 and finally 7/6/5.
 				// The first number of each set is the vertex index which we have to store.
 				vector<int> indices;
+				vector<int> uvIndices;
 				int index;
+				int uvIndex;
 
 				// We have to get rid of indices we're not interested in.
 				int indexThrash;
 
-				while (lineStream >> index >> thrash >> indexThrash >> thrash >> indexThrash)
+				while (lineStream >> index >> thrash >> uvIndex >> thrash >> indexThrash)
 				{
 					indices.push_back(index - 1);
+					uvIndices.push_back(uvIndex - 1);
+
 				}
 
 				model.faces.push_back(indices);
+				model.facesUV.push_back(uvIndices);
 			}
 		}
 

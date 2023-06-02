@@ -10,6 +10,7 @@
 #include "LightShadedModelDemo.h"
 #include "ZBuffer2dDemo.h"
 #include "ZBuffer3dDemo.h"
+#include "TexturedModelDemo.h"
 
 namespace Renderer
 {
@@ -26,6 +27,7 @@ namespace Renderer
 		applications.push_back(make_unique<LightShadedModelDemo>());
 		applications.push_back(make_unique<ZBuffer2dDemo>());
 		applications.push_back(make_unique<ZBuffer3dDemo>());
+		applications.push_back(make_unique<TexturedModelDemo>());
 
 		cout << "Choose application: " << endl;
 		for (int i = 0; i < applications.size(); i++)

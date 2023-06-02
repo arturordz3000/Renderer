@@ -30,6 +30,10 @@ namespace Renderer
 			Vector3<float> vertex2 = this->vertices[this->faces[i][1]];
 			Vector3<float> vertex3 = this->vertices[this->faces[i][2]];
 
+			Vector2<float> uv1 = this->uv[this->facesUV[i][0]];
+			Vector2<float> uv2 = this->uv[this->facesUV[i][1]];
+			Vector2<float> uv3 = this->uv[this->facesUV[i][2]];
+
 			switch (mode)
 			{
 				case RenderMode::FlatRandom:
@@ -67,6 +71,21 @@ namespace Renderer
 					if (lightIntensity > 0)
 					{
 						drawTriangle({ point1, point2, point3 }, zBuffer, image, TGAColor(color.r * lightIntensity, color.g * lightIntensity, color.b * lightIntensity, color.a));
+					}
+
+					break;
+				}
+				case RenderMode::Textured:
+				{
+					// Converting from <-width to +width> to <0 to +width>
+					Vector3<float> point1(int((vertex1.x + 1.) * viewportWidth / 2. + .5), int((vertex1.y + 1.) * viewportHeight / 2. + .5), vertex1.z);
+					Vector3<float> point2(int((vertex2.x + 1.) * viewportWidth / 2. + .5), int((vertex2.y + 1.) * viewportHeight / 2. + .5), vertex2.z);
+					Vector3<float> point3(int((vertex3.x + 1.) * viewportWidth / 2. + .5), int((vertex3.y + 1.) * viewportHeight / 2. + .5), vertex3.z);
+
+					float lightIntensity = computeLightIntensity({ vertex1, vertex2, vertex3 }, this->lightDirection, image);
+					if (lightIntensity > 0)
+					{
+						drawTriangle({ point1, point2, point3 }, zBuffer, image, texture, { uv1, uv2, uv3 }, lightIntensity);
 					}
 
 					break;
