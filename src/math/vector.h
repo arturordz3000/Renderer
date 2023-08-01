@@ -66,7 +66,7 @@ namespace Renderer
 			this->z + vector.z
 			);
 	}
-
+	
 	template<class T>
 	Vector3<T> Vector3<T>::operator-(const Vector3<T>& vector)
 	{

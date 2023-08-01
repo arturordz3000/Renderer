@@ -141,6 +141,7 @@
     <ClCompile Include="src\math\Barycentric.cpp" />
     <ClCompile Include="src\math\BoundingBox2d.cpp" />
     <ClCompile Include="src\math\BoundingBox3d.cpp" />
+    <ClCompile Include="src\math\Matrix.cpp" />
     <ClCompile Include="src\model\Model.cpp" />
     <ClCompile Include="src\model\ObjModelLoader.cpp" />
     <ClCompile Include="src\vendor\tga\tgaimage.cpp" />
@@ -161,6 +162,7 @@
     <ClInclude Include="src\math\Barycentric.h" />
     <ClInclude Include="src\math\BoundingBox2d.h" />
     <ClInclude Include="src\math\BoundingBox3d.h" />
+    <ClInclude Include="src\math\Matrix.h" />
     <ClInclude Include="src\math\Point.h" />
     <ClInclude Include="src\math\Vector.h" />
     <ClInclude Include="src\model\Model.h" />
