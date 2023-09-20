@@ -1,5 +1,7 @@
 #pragma once
 #include <vector>
+#include <cassert>
+#include <iostream>
 #include "Vector.h"
 
 namespace Renderer
@@ -16,7 +18,7 @@ namespace Renderer
 			this->m = std::vector<std::vector<T>>(r, std::vector<T>(c, 0));
 		}
 
-		std::vector<T> operator[](const int i);
+		std::vector<T>& operator[](const int i);
 		Matrix<T> operator*(Matrix<T>& other);
 
 		int GetRowsSize()
@@ -28,6 +30,8 @@ namespace Renderer
 		{
 			return this->m[0].size();
 		}
+
+		void Print();
 
 		static Matrix<T> FromVector3(Vector3<T>& vector);
 		static Matrix<T> Identity(int r, int c);

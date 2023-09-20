@@ -1,8 +1,10 @@
 #include "Matrix.h"
 
 namespace Renderer {
+	template class Matrix<float>;
+
 	template<typename T>
-	std::vector<T> Matrix<T>::operator[](const int i)
+	std::vector<T>& Matrix<T>::operator[](const int i)
 	{
 		assert(i >= 0 && i < this->m.size());
 		return this->m[i];
@@ -12,17 +14,38 @@ namespace Renderer {
 	Matrix<T> Matrix<T>::operator*(Matrix<T>& other)
 	{
 		assert(this->GetColumnsSize() == other.GetRowsSize());
-		Matrix<T> m(this->GetRowsSize(), other.GetColumnsSize());
+		Matrix<T> result(this->GetRowsSize(), other.GetColumnsSize());
 
-		for (int i = 0; i < m.GetRowsSize(); i++)
+		for (int i = 0; i < result.GetColumnsSize(); i++)
 		{
-			for (int j = 0; j < m.GetColumnsSize(); j++) 
+			for (int j = 0; j < result.GetRowsSize(); j++)
 			{
-				// TODO: I think I need another loop here.
+				T sum = 0;
+
+				for (int k = 0; k < other.GetRowsSize(); k++)
+				{
+					sum += this->m[j][k] * other[k][i];
+				}
+
+				result[j][i] = sum;
 			}
 		}
 
-		return m;
+		return result;
+	}
+
+	template<typename T>
+	void Matrix<T>::Print()
+	{
+		for (int i = 0; i < this->GetRowsSize(); i++)
+		{
+			for (int j = 0; j < this->GetColumnsSize(); j++)
+			{
+				std::cout << this->m[i][j] << " ";
+			}
+
+			std::cout << std::endl;
+		}
 	}
 
 	template<typename T>
@@ -32,6 +55,8 @@ namespace Renderer {
 		m[0][0] = vector.x;
 		m[1][0] = vector.y;
 		m[2][0] = vector.z;
+
+		return m;
 	}
 
 	template<typename T>

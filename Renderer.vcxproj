@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\application\LightShadedModelDemo.cpp" />
+    <ClCompile Include="src\application\MatrixDemo.cpp" />
     <ClCompile Include="src\application\RandomFlatShadedModelDemo.cpp" />
     <ClCompile Include="src\application\SimpleTrianglesDemo.cpp" />
     <ClCompile Include="src\application\ApplicationsMenu.cpp" />
@@ -149,6 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\application\LightShadedModelDemo.h" />
+    <ClInclude Include="src\application\MatrixDemo.h" />
     <ClInclude Include="src\application\RandomFlatShadedModelDemo.h" />
     <ClInclude Include="src\application\SimpleTrianglesDemo.h" />
     <ClInclude Include="src\application\ApplicationsMenu.h" />

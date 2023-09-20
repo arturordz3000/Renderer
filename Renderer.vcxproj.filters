@@ -84,6 +84,9 @@
     <ClCompile Include="src\math\Matrix.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\application\MatrixDemo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\vendor\tga\tgaimage.h">
@@ -150,6 +153,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\math\Matrix.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\application\MatrixDemo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
