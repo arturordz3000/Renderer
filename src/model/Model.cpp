@@ -4,10 +4,19 @@
 #include "../geometry/line.h"
 #include "../vendor/tga/tgaimage.h"
 #include "../geometry/Triangle.h"
+#include "../math/Matrix.h"
 
 namespace Renderer
 {
 	float computeLightIntensity(const std::vector<Vector3<float>>& triangle, Vector3<float> &lightDirection, const TGAImage& image);
+
+	Vector3<float> ToVector3WithProjection(const Matrix<float>& matrix)
+	{
+		float nonZeroDiv = 0.0000001;
+		float w = matrix[3][0] + nonZeroDiv;
+		Vector3<float> v(matrix[0][0] / w, matrix[1][0] / w, matrix[2][0] / w);
+		return v;
+	}
 
 	void Model::Draw(TGAImage &image, TGAColor color, RenderMode mode)
 	{
@@ -18,6 +27,13 @@ namespace Renderer
 
 		int pixelsCount = viewportWidth * viewportHeight;
 		float* zBuffer = new float[pixelsCount];
+
+		float c = 3.0f;
+		Matrix<float> projection(4, 4);
+		projection[0][0] = 1; projection[0][1] = 0; projection[0][2] = 0; projection[0][3] = 0;
+		projection[1][0] = 0; projection[1][1] = 1; projection[1][2] = 0; projection[1][3] = 0;
+		projection[2][0] = 0; projection[2][1] = 0; projection[2][2] = 1; projection[2][3] = 0;
+		projection[3][0] = 0; projection[3][1] = 0; projection[3][2] = -1/c; projection[3][3] = 1;
 
 		for (int i = 0; i < pixelsCount; i++)
 		{
@@ -81,6 +97,30 @@ namespace Renderer
 					Vector3<float> point1(int((vertex1.x + 1.) * viewportWidth / 2. + .5), int((vertex1.y + 1.) * viewportHeight / 2. + .5), vertex1.z);
 					Vector3<float> point2(int((vertex2.x + 1.) * viewportWidth / 2. + .5), int((vertex2.y + 1.) * viewportHeight / 2. + .5), vertex2.z);
 					Vector3<float> point3(int((vertex3.x + 1.) * viewportWidth / 2. + .5), int((vertex3.y + 1.) * viewportHeight / 2. + .5), vertex3.z);
+
+					float lightIntensity = computeLightIntensity({ vertex1, vertex2, vertex3 }, this->lightDirection, image);
+					if (lightIntensity > 0)
+					{
+						drawTriangle({ point1, point2, point3 }, zBuffer, image, texture, { uv1, uv2, uv3 }, lightIntensity);
+					}
+
+					break;
+				}
+				case RenderMode::TexturedCenterProjection:
+				{
+					// Applying projection
+					Matrix<float> vertex1Matrix = Matrix<float>::FromVector3(vertex1);
+					Matrix<float> vertex2Matrix = Matrix<float>::FromVector3(vertex2);
+					Matrix<float> vertex3Matrix = Matrix<float>::FromVector3(vertex3);
+
+					Vector3<float> screen_vertex1 = ToVector3WithProjection(projection * vertex1Matrix);
+					Vector3<float> screen_vertex2 = ToVector3WithProjection(projection * vertex2Matrix);
+					Vector3<float> screen_vertex3 = ToVector3WithProjection(projection * vertex3Matrix);
+
+					// Converting from <-width to +width> to <0 to +width>
+					Vector3<float> point1(int((screen_vertex1.x + 1.) * viewportWidth / 2. + .5), int((screen_vertex1.y + 1.) * viewportHeight / 2. + .5), screen_vertex1.z);
+					Vector3<float> point2(int((screen_vertex2.x + 1.) * viewportWidth / 2. + .5), int((screen_vertex2.y + 1.) * viewportHeight / 2. + .5), screen_vertex2.z);
+					Vector3<float> point3(int((screen_vertex3.x + 1.) * viewportWidth / 2. + .5), int((screen_vertex3.y + 1.) * viewportHeight / 2. + .5), screen_vertex3.z);
 
 					float lightIntensity = computeLightIntensity({ vertex1, vertex2, vertex3 }, this->lightDirection, image);
 					if (lightIntensity > 0)

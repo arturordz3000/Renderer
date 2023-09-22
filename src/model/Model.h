@@ -15,7 +15,8 @@ namespace Renderer
 		FlatRandom,
 		FlatLight,
 		ZBuffer,
-		Textured
+		Textured,
+		TexturedCenterProjection
 	};
 
 	class Model

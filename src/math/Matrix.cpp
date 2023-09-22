@@ -11,6 +11,13 @@ namespace Renderer {
 	}
 
 	template<typename T>
+	const std::vector<T>& Matrix<T>::operator[](const int i) const
+	{
+		assert(i >= 0 && i < this->m.size());
+		return this->m[i];
+	}
+
+	template<typename T>
 	Matrix<T> Matrix<T>::operator*(Matrix<T>& other)
 	{
 		assert(this->GetColumnsSize() == other.GetRowsSize());
@@ -51,10 +58,11 @@ namespace Renderer {
 	template<typename T>
 	Matrix<T> Matrix<T>::FromVector3(Vector3<T>& vector) 
 	{
-		Matrix<T> m(3, 1);
+		Matrix<T> m(4, 1);
 		m[0][0] = vector.x;
 		m[1][0] = vector.y;
 		m[2][0] = vector.z;
+		m[3][0] = 1;
 
 		return m;
 	}

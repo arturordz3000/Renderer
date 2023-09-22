@@ -19,6 +19,7 @@ namespace Renderer
 		}
 
 		std::vector<T>& operator[](const int i);
+		const std::vector<T>& operator[](const int i) const;
 		Matrix<T> operator*(Matrix<T>& other);
 
 		int GetRowsSize()

@@ -133,6 +133,7 @@
     <ClCompile Include="src\application\SimpleTrianglesDemo.cpp" />
     <ClCompile Include="src\application\ApplicationsMenu.cpp" />
     <ClCompile Include="src\application\LineDemo.cpp" />
+    <ClCompile Include="src\application\TexturedModelCentralProjectionDemo.cpp" />
     <ClCompile Include="src\application\TexturedModelDemo.cpp" />
     <ClCompile Include="src\application\WireframeDemo.cpp" />
     <ClCompile Include="src\application\ZBuffer2dDemo.cpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="src\application\ApplicationsMenu.h" />
     <ClInclude Include="src\application\IApplication.h" />
     <ClInclude Include="src\application\LineDemo.h" />
+    <ClInclude Include="src\application\TexturedModelCentralProjectionDemo.h" />
     <ClInclude Include="src\application\TexturedModelDemo.h" />
     <ClInclude Include="src\application\WireframeDemo.h" />
     <ClInclude Include="src\application\ZBuffer2dDemo.h" />
